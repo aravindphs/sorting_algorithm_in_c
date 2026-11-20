@@ -1,0 +1,85 @@
+
+#include stdio.h
+#include stdlib.h
+
+struct Node
+{
+    int data;
+    struct Node next;
+};
+
+struct Node insert(struct Node head, int value)
+{
+    struct Node newNode = (struct Node)malloc(sizeof(struct Node));
+
+    if (newNode == NULL)
+        return head;
+
+    newNode-data = value;
+    newNode-next = NULL;
+
+    if (head == NULL)
+        return newNode;
+
+    struct Node temp = head;
+
+    while (temp-next != NULL)
+        temp = temp-next;
+
+    temp-next = newNode;
+
+    return head;
+}
+
+int search(struct Node head, int x)
+{
+    int pos = 0;
+    struct Node temp = head;
+
+    while (temp != NULL)
+    {
+        if (temp-data == x)
+            return pos;
+
+        temp = temp-next;
+        pos++;
+    }
+
+    return -1;
+}
+
+int main()
+{
+    int n, value, x;
+
+    if (scanf(%d, &n) != 1  n = 0)
+    {
+        printf(Invalid input);
+        return 0;
+    }
+
+    struct Node head = NULL;
+
+    for (int i = 0; i  n; i++)
+    {
+        if (scanf(%d, &value) != 1)
+        {
+            printf(Invalid input);
+            return 0;
+        }
+
+        head = insert(head, value);
+    }
+
+    if (scanf(%d, &x) != 1)
+    {
+        printf(Invalid input);
+        return 0;
+    }
+
+    int result = search(head, x);
+
+    printf(%d, result + 1);
+
+    return 0;
+}
